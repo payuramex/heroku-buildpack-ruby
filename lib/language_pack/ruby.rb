@@ -97,13 +97,6 @@ WARNING
     )
     allow_git do
       install_mecab
-      run("cp -R vendor/mecab /app/vendor/mecab")
-      ENV['PATH'] += ":/app/vendor/mecab/bin"
-      ENV['CFLAGS'] = "-I/app/vendor/mecab/include"
-      ENV['CPATH'] = "/app/vendor/mecab/include"
-      ENV['CPPPATH'] = "/app/vendor/mecab/include"
-      ENV['LIBRARY_PATH'] = "/app/vendor/mecab/lib"
-      ENV['LDFLAGS'] = "-L/app/vendor/mecab/lib"
       install_bundler_in_app(slug_vendor_base)
       load_bundler_cache
       build_bundler
@@ -690,12 +683,8 @@ EOF
   end
 
   def install_mecab
-    topic("Installing mecab")
-    bin_dir = "vendor/mecab"
-    FileUtils.mkdir_p bin_dir
-    Dir.chdir(bin_dir) do |dir|
-      run("curl #{MECAB_VENDOR_URL} -s -o - | tar xzf -")
-    end
+    topic("Finding mecab LOLOL")
+    run("find / -iname mecab")
   end
 
   def load_default_cache?
